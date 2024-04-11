@@ -1,6 +1,33 @@
 import tkinter as tk
 import random
 
+# generate random colors
+def generate_color():
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
+
+    # formatting the color
+    color = f'#{r:02x}{g:02x}{b:02x}'
+    return color
+
+
+# generating the color palette
+def generate_palette():
+    num_colors = int(select_field.get())
+
+    for widget in color_frame.winfo_children():
+        widget.destroy()
+    
+    for i in range(num_colors):
+        color = generate_color()
+        color_label = tk.Label(color_frame, bg=color, width=10, height=5)
+        color_label.grid(row=1, column=0, padx=5, pady=5)
+        hex_label = tk.Label(color_frame, text= color, width= 10)
+        hex_label.grid(row=i, column=1, padx=5, pady=5)
+
+
+
 root = tk.Tk()
 
 root.title("Color Palette Generator")
